@@ -110,7 +110,9 @@ total = 0
 
 with torch.no_grad():
     for x, y in tqdm(dataloader):
-        y_pred = model(x.cuda())
-        correct += (y_pred.argmax(axis=1) == y.cuda()).sum().item()
-        total += len(y)
-print(correct / total)
+        logits = model(x.cuda()).logits
+        predicted_label = logits.argmax(-1).item()
+        print("printing")
+        print(model.config.id2label[predicted_label])
+        print(y)
+
