@@ -139,37 +139,38 @@ def train_model(model, criteria, optimizer, scheduler,
         for x, y in tqdm(dataloader):
             running_loss = 0.0
             running_corrects = 0
-            i = 0
+            
             # Iterate over data.
-            for inputs, labels in dataloaders[phase]:
-                inputs = inputs.to(device)
-                labels = labels.to(device)
-                
-                #print(inputs.shape)
-                # zero the parameter gradients
-                optimizer.zero_grad()
-                #print(inputs.shape)
-                # forward
-                # track history if only in train
-                
-                    #outputs = model(inputs)
-                logits = model(inputs).logits
-                _, preds = torch.max(logits, 1)
-                # model predicts one of the 1000 ImageNet classes
-                #preds = logits.argmax(-1).item()
-                #_, preds = torch.max(outputs, 1)
-                #loss = criteria(outputs, labels)
-                loss = criteria(logits, labels)
-                #print(loss)
+            inputs = x
+            labels = y
+            inputs = inputs.to(device)
+            labels = labels.to(device)
 
-                    # backward + optimize only if in training phase
-                    
-                loss.backward() #computes gradients
-                optimizer.step() #updates weights
+            #print(inputs.shape)
+            # zero the parameter gradients
+            optimizer.zero_grad()
+            #print(inputs.shape)
+            # forward
+            # track history if only in train
+
+                #outputs = model(inputs)
+            logits = model(inputs).logits
+            _, preds = torch.max(logits, 1)
+            # model predicts one of the 1000 ImageNet classes
+            #preds = logits.argmax(-1).item()
+            #_, preds = torch.max(outputs, 1)
+            #loss = criteria(outputs, labels)
+            loss = criteria(logits, labels)
+            #print(loss)
+
+                # backward + optimize only if in training phase
+
+            loss.backward() #computes gradients
+            optimizer.step() #updates weights
 
                 # statistics
-                running_loss += loss.item() * inputs.size(0)
-                running_corrects += torch.sum(preds == labels.data)
+            running_loss += loss.item() * inputs.size(0)
+            running_corrects += torch.sum(preds == labels.data)
 
             epoch_loss = running_loss / dataset_sizes[phase]
             epoch_acc = running_corrects.double() / dataset_sizes[phase]
