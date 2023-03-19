@@ -138,7 +138,7 @@ def main():
                     image_size=config.image_size,
                     batch_size=config.batch_size,
                     num_workers=config.num_workers,
-                    split='val')
+                    split='val2')
 
     # training criterion
     print("create criterion and optimizer")
