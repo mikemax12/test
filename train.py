@@ -25,16 +25,16 @@ def train_epoch(epoch, model, data_loader, criterion, optimizer, lr_scheduler, m
         optimizer.step()
         lr_scheduler.step()
 
-        acc1, acc5 = accuracy(batch_pred, batch_target, topk=(1, 5))
+        #acc1, acc5 = accuracy(batch_pred, batch_target, topk=(1, 5))
 
         metrics.writer.set_step((epoch - 1) * len(data_loader) + batch_idx)
         metrics.update('loss', loss.item())
-        metrics.update('acc1', acc1.item())
-        metrics.update('acc5', acc5.item())
+        #metrics.update('acc1', acc1.item())
+        #metrics.update('acc5', acc5.item())
 
         if batch_idx % 100 == 0:
-            print("Train Epoch: {:03d} Batch: {:05d}/{:05d} Loss: {:.4f} Acc@1: {:.2f}, Acc@5: {:.2f}"
-                    .format(epoch, batch_idx, len(data_loader), loss.item(), acc1.item(), acc5.item()))
+            print("Train Epoch: {:03d} Batch: {:05d}/{:05d} Loss: {:.4f}"
+                    .format(epoch, batch_idx, len(data_loader), loss.item()))
     return metrics.result()
 
 
@@ -51,19 +51,19 @@ def valid_epoch(epoch, model, data_loader, criterion, metrics, device=torch.devi
 
             batch_pred = model(batch_data)
             loss = criterion(batch_pred, batch_target)
-            acc1, acc5 = accuracy(batch_pred, batch_target, topk=(1, 5))
+            #acc1, acc5 = accuracy(batch_pred, batch_target, topk=(1, 5))
 
             losses.append(loss.item())
-            acc1s.append(acc1.item())
-            acc5s.append(acc5.item())
+            #acc1s.append(acc1.item())
+            #acc5s.append(acc5.item())
 
     loss = np.mean(losses)
-    acc1 = np.mean(acc1s)
-    acc5 = np.mean(acc5s)
+    #acc1 = np.mean(acc1s)
+    #acc5 = np.mean(acc5s)
     metrics.writer.set_step(epoch, 'valid')
     metrics.update('loss', loss)
-    metrics.update('acc1', acc1)
-    metrics.update('acc5', acc5)
+    #metrics.update('acc1', acc1)
+    #metrics.update('acc5', acc5)
     return metrics.result()
 
 
