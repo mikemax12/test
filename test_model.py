@@ -110,7 +110,7 @@ total = 0
 
 with torch.no_grad():
     for x, y in tqdm(dataloader):
-        logits = model(inputs).logits
+        logits = model(x).logits
         _, preds = torch.max(logits, 1)
         # model predicts one of the 1000 ImageNet classes
         #preds = logits.argmax(-1).item()
@@ -118,7 +118,7 @@ with torch.no_grad():
         #loss = criteria(outputs, labels)
         loss = criteria(logits, labels)
         print("printing")
-        print(output)
+        print(logits)
         print(preds)
         print(y[0])
 
