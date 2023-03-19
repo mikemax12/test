@@ -131,7 +131,7 @@ def train_model(model, criteria, optimizer, scheduler,
     best_model_wts = copy.deepcopy(model.state_dict())
     best_acc = 0.0
 
-    for epoch in range(1, 10):#num_epochs+1):
+    for epoch in range(1, 2):#num_epochs+1):
         print('Epoch {}/{}'.format(epoch, num_epochs))
         print('-' * 10)
 
@@ -171,17 +171,21 @@ def train_model(model, criteria, optimizer, scheduler,
                 # statistics
             running_loss += loss.item() * inputs.size(0)
             running_corrects += torch.sum(preds == labels.data)
+            
+            print(running_corrects)
+            print(running_corrects)
 
             epoch_loss = running_loss / len(dataset)
-            epoch_acc = running_corrects.double() / len(dataset)
+            #epoch_acc = running_corrects.double() / len(dataset)
+            epoch_acc = running_corrects/64
 
             print('{} Loss: {:.4f} Acc: {:.4f}'.format(
                 "train", epoch_loss, epoch_acc))
 
             # deep copy the model
-            
-            best_acc = epoch_acc
-            best_model_wts = copy.deepcopy(model.state_dict())
+            if epoch_acc > best_acc:
+                best_acc = epoch_acc
+                best_model_wts = copy.deepcopy(model.state_dict())
            
 
         print()
