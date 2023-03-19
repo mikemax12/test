@@ -8,6 +8,7 @@ from checkpoint import load_checkpoint
 from data_loaders import *
 from utils import setup_device, accuracy, MetricTracker, TensorboardWriter
 
+torch.cuda.empty_cache()
 
 def train_epoch(epoch, model, data_loader, criterion, optimizer, lr_scheduler, metrics, device=torch.device('cpu')):
     metrics.reset()
