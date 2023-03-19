@@ -110,9 +110,13 @@ total = 0
 
 with torch.no_grad():
     for x, y in tqdm(dataloader):
-        output = model(x[0].cuda()).logits
-        predicted_label = logits.argmax(-1).item()
-        print(model.config.id2label[predicted_label])
+        logits = model(inputs).logits
+        _, preds = torch.max(logits, 1)
+        # model predicts one of the 1000 ImageNet classes
+        #preds = logits.argmax(-1).item()
+        #_, preds = torch.max(outputs, 1)
+        #loss = criteria(outputs, labels)
+        loss = criteria(logits, labels)
         print("printing")
         print(output)
         print(preds)
