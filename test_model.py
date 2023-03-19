@@ -120,5 +120,5 @@ with torch.no_grad():
         print("printing")
         print(logits)
         print(preds)
-        print(y[0])
+        print(y)
 
