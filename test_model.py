@@ -111,7 +111,9 @@ total = 0
 with torch.no_grad():
     for x, y in tqdm(dataloader):
         output = model(x.cuda())
+        _, preds = torch.max(outputs, 1)
         print("printing")
         print(output)
+        print(preds)
         print(y)
 
