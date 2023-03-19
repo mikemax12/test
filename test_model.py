@@ -101,7 +101,7 @@ dataloader = DataLoader(
 image_processor = AutoImageProcessor.from_pretrained("google/vit-base-patch16-224")
 model = ViTForImageClassification.from_pretrained("google/vit-base-patch16-224")
 
-dataset_sizes = len(datasets['val'])
+dataset_sizes = len(dataset['val'])
 
 print("start training")
 
