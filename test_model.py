@@ -134,11 +134,11 @@ def train_model(model, criteria, optimizer, scheduler,
     for epoch in range(1, 15):#num_epochs+1):
         print('Epoch {}/{}'.format(epoch, num_epochs))
         print('-' * 10)
-
+        running_loss = 0.0
+        running_corrects = 0
         # Each epoch has a training and validation phase
         for x, y in tqdm(dataloader):
-            running_loss = 0.0
-            running_corrects = 0
+            
             
             # Iterate over data.
             inputs = x
@@ -176,8 +176,9 @@ def train_model(model, criteria, optimizer, scheduler,
             print(running_corrects)
 
             epoch_loss = running_loss / len(dataset)
-            #epoch_acc = running_corrects.double() / len(dataset)
-            epoch_acc = running_corrects/64
+            epoch_acc = running_corrects.double() / len(dataset)
+            print(running_corrects / len(dataset))
+            #epoch_acc = running_corrects/64
 
             print('{} Loss: {:.4f} Acc: {:.4f}'.format(
                 "train", epoch_loss, epoch_acc))
