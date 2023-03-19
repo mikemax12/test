@@ -116,7 +116,7 @@ with torch.no_grad():
         #preds = logits.argmax(-1).item()
         #_, preds = torch.max(outputs, 1)
         #loss = criteria(outputs, labels)
-        loss = criteria(logits, labels)
+        #loss = criteria(logits, labels)
         print("printing")
         print(logits)
         print(preds)
