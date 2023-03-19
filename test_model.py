@@ -128,8 +128,10 @@ def train_model(model, criteria, optimizer, scheduler,
             running_loss = 0.0
             running_corrects = 0
             i = 0
+            print(iter(dataloader))
+            print(iter(dataloader).next())
             # Iterate over data.
-            for inputs, labels in iter(dataloader).next():
+            for inputs, labels in enumerate(dataloader):
                 inputs = inputs.to(device)
                 labels = labels.to(device)
 
