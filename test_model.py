@@ -107,7 +107,7 @@ correct = 0
 total = 0
 
 
-
+'''
 with torch.no_grad():
     for x, y in tqdm(dataloader):
         logits = model(x.cuda()).logits
@@ -121,7 +121,7 @@ with torch.no_grad():
         print(torch.max(logits, 1))
         print(logits)
         print(preds)
-        print(y)
+        print(y)'''
         
  
 def train_model(model, criteria, optimizer, scheduler,    
@@ -131,7 +131,7 @@ def train_model(model, criteria, optimizer, scheduler,
     best_model_wts = copy.deepcopy(model.state_dict())
     best_acc = 0.0
 
-    for epoch in range(1, 2):#num_epochs+1):
+    for epoch in range(1, 15):#num_epochs+1):
         print('Epoch {}/{}'.format(epoch, num_epochs))
         print('-' * 10)
 
