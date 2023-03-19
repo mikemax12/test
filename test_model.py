@@ -129,7 +129,7 @@ def train_model(model, criteria, optimizer, scheduler,
             running_corrects = 0
             i = 0
             # Iterate over data.
-            for inputs, labels in dataloader[phase]:
+            for inputs, labels in iter(dataloader).next():
                 inputs = inputs.to(device)
                 labels = labels.to(device)
 
@@ -143,16 +143,16 @@ def train_model(model, criteria, optimizer, scheduler,
                 #print(inputs.shape)
                 # forward
                 # track history if only in train
-                with torch.set_grad_enabled(phase == 'train'):
-                    outputs = model(inputs)
-                    print(outputs)
-                    _, preds = torch.max(outputs, 1)
-                    loss = criteria(outputs, labels)
+                #with torch.set_grad_enabled(phase == 'train'):
+                outputs = model(inputs)
+                print(outputs)
+                _, preds = torch.max(outputs, 1)
+                loss = criteria(outputs, labels)
 
-                    # backward + optimize only if in training phase
-                    if phase == 'train':
-                        loss.backward()
-                        optimizer.step()
+                # backward + optimize only if in training phase
+                if phase == 'train':
+                    loss.backward()
+                    optimizer.step()
 
                 # statistics
                 running_loss += loss.item() * inputs.size(0)
