@@ -233,7 +233,7 @@ def main():
                 x, y = batch
                 print(x)
                 print(y)
-                loss = model(x, y)
+                loss = model(x, y) #labels=None
                 
                 
                 # Iterate over data.
@@ -269,23 +269,23 @@ def main():
 
                     # statistics
                 running_loss += loss.item() * x.size(0)
-                running_corrects += torch.sum(preds == labels.data)
+                #running_corrects += torch.sum(preds == labels.data)
                 
-                print(running_corrects)
-                print(running_corrects)
+                #print(running_corrects)
+                
 
                 epoch_loss = running_loss / len(dataset)
-                epoch_acc = running_corrects.double() / len(dataset)
-                print(running_corrects / len(dataset))
+                #epoch_acc = running_corrects.double() / len(dataset)
+                #print(running_corrects / len(dataset))
                 #epoch_acc = running_corrects/64
 
-                print('{} Loss: {:.4f} Acc: {:.4f}'.format(
-                    "train", epoch_loss, epoch_acc))
+                print('{} Loss: {:.4f}'.format(
+                    "train", epoch_loss)) # epoch_acc))
                 scheduler.step()
                 # deep copy the model
-                if epoch_acc > best_acc:
-                    best_acc = epoch_acc
-                    best_model_wts = copy.deepcopy(model.state_dict())
+                #if epoch_acc > best_acc:
+                    #best_acc = epoch_acc
+                   # best_model_wts = copy.deepcopy(model.state_dict())
             
 
             print()
