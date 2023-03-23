@@ -515,7 +515,7 @@ def main():
 
     model = VisionTransformer(config, 224, zero_head=True, num_classes=num_classes)
     #model.load_from(np.load(args.pretrained_dir))
-    model.to(args.device)
+    #model.to(args.device)
     num_params = count_parameters(model)
 
     #logger.info("{}".format(config))
