@@ -516,12 +516,12 @@ def main():
     model = VisionTransformer(config, 224, zero_head=True, num_classes=num_classes)
     #model.load_from(np.load(args.pretrained_dir))
     #model.to(args.device)
-    num_params = count_parameters(model)
+    #num_params = count_parameters(model)
 
     #logger.info("{}".format(config))
     #logger.info("Training parameters %s", args)
     #logger.info("Total Parameter: \t%2.1fM" % num_params)
-    print(num_params)
+    #print(num_params)
 
     # Training
     train(args, model)
