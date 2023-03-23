@@ -509,12 +509,12 @@ def main():
     # Model & Tokenizer Setup
     '''
    
-    config = CONFIGS[args.model_type]
+    config = CONFIGS['ViT-B_16']
 
     num_classes = 1000
 
-    model = VisionTransformer(config, args.img_size, zero_head=True, num_classes=num_classes)
-    model.load_from(np.load(args.pretrained_dir))
+    model = VisionTransformer(config, 224, zero_head=True, num_classes=num_classes)
+    #model.load_from(np.load(args.pretrained_dir))
     model.to(args.device)
     num_params = count_parameters(model)
 
