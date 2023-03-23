@@ -227,30 +227,37 @@ def main():
             running_loss = 0.0
             running_corrects = 0
             # Each epoch has a training and validation phase
-            for x, y in tqdm(dataloader):
+            epoch_it = tqdm(dataloader)
+            for step, batch in enumerate(epoch_it):
+                batch = tuple(t.to(args.device) for t in batch)
+                x, y = batch
+                loss = model(x, y)
                 
                 
                 # Iterate over data.
-                inputs = x
-                labels = y
-                inputs = inputs.to(device)
-                labels = labels.to(device)
+                #inputs = x
+                #labels = y
+                #inputs = inputs.to(device)
+                #labels = labels.to(device)
 
                 #print(inputs.shape)
                 # zero the parameter gradients
-                optimizer.zero_grad()
+                #optimizer.zero_grad()
                 #print(inputs.shape)
                 # forward
                 # track history if only in train
 
                     #outputs = model(inputs)
-                logits = model(inputs)
-                _, preds = torch.max(logits, 1)
+               
+
+                #logits = model(inputs)
+                #print(logits)
+                #_, preds = torch.max(logits, 1)
                 # model predicts one of the 1000 ImageNet classes
                 #preds = logits.argmax(-1).item()
                 #_, preds = torch.max(outputs, 1)
                 #loss = criteria(outputs, labels)
-                loss = criteria(logits, labels)
+                #loss = criteria(logits, labels)
                 #print(loss)
 
                     # backward + optimize only if in training phase
