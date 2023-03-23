@@ -217,7 +217,7 @@ def main():
         since = time.time()
 
         best_model_wts = copy.deepcopy(model.state_dict())
-        best_acc = 0.0
+        best_loss = 30
 
         
 
@@ -287,6 +287,9 @@ def main():
                 #if epoch_acc > best_acc:
                     #best_acc = epoch_acc
                    # best_model_wts = copy.deepcopy(model.state_dict())
+                if epoch_loss > best_loss:
+                    best_loss = epoch_loss
+                    best_model_wts = copy.deepcopy(model.state_dict())
             
 
             print()
