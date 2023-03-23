@@ -231,8 +231,8 @@ def main():
             for step, batch in enumerate(epoch_it):
                 batch = tuple(t.to(device) for t in batch)
                 x, y = batch
-                print(x)
-                print(y)
+                #print(x)
+                #print(y)
                 loss = model(x, y) #labels=None
                 
                 
@@ -281,6 +281,7 @@ def main():
 
                 print('{} Loss: {:.4f}'.format(
                     "train", epoch_loss)) # epoch_acc))
+                print("loss", loss)
                 scheduler.step()
                 # deep copy the model
                 #if epoch_acc > best_acc:
