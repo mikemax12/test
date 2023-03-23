@@ -121,10 +121,9 @@ def valid(args, model, writer, test_loader, global_step):
     return accuracy
 '''
 
-def train(args, model):
+def train(model):
     """ Train the model """
-    if args.local_rank in [-1, 0]:
-        os.makedirs(args.output_dir, exist_ok=True)
+   
         #writer = SummaryWriter(log_dir=os.path.join("logs", args.name))
 
     #args.train_batch_size = args.train_batch_size // args.gradient_accumulation_steps
@@ -524,7 +523,7 @@ def main():
     #print(num_params)
 
     # Training
-    train(args, model)
+    train(model)
 
 
 if __name__ == "__main__":
