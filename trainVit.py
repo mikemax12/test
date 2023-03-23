@@ -231,6 +231,8 @@ def main():
             for step, batch in enumerate(epoch_it):
                 batch = tuple(t.to(device) for t in batch)
                 x, y = batch
+                print(x)
+                print(y)
                 loss = model(x, y)
                 
                 
@@ -266,7 +268,7 @@ def main():
                 optimizer.step() #updates weights
 
                     # statistics
-                running_loss += loss.item() * inputs.size(0)
+                running_loss += loss.item() * x.size(0)
                 running_corrects += torch.sum(preds == labels.data)
                 
                 print(running_corrects)
