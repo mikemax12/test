@@ -513,6 +513,7 @@ def main():
     num_classes = 1000
 
     model = VisionTransformer(config, 224, zero_head=True, num_classes=num_classes)
+    print(model.state_dict())
     #model.load_from(np.load(args.pretrained_dir))
     #model.to(args.device)
     #num_params = count_parameters(model)
