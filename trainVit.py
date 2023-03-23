@@ -14,8 +14,8 @@ import torch.distributed as dist
 
 from tqdm import tqdm
 from torch.utils.tensorboard import SummaryWriter
-from apex import amp
-from apex.parallel import DistributedDataParallel as DDP
+#from apex import amp
+#from apex.parallel import DistributedDataParallel as DDP
 
 from models.modeling import VisionTransformer, CONFIGS
 from utils.scheduler import WarmupLinearSchedule, WarmupCosineSchedule
@@ -23,6 +23,7 @@ from utils.data_utils import get_loader
 from utils.dist_util import get_world_size
 
 
+'''
 logger = logging.getLogger(__name__)
 
 
@@ -118,7 +119,7 @@ def valid(args, model, writer, test_loader, global_step):
 
     writer.add_scalar("test/accuracy", scalar_value=accuracy, global_step=global_step)
     return accuracy
-
+'''
 
 def train(args, model):
     """ Train the model """
@@ -153,13 +154,13 @@ def train(args, model):
         #model = DDP(model, message_size=250000000, gradient_predivide_factor=get_world_size())
 
     # Train!
-    logger.info("***** Running training *****")
+    '''logger.info("***** Running training *****")
     logger.info("  Total optimization steps = %d", args.num_steps)
     logger.info("  Instantaneous batch size per GPU = %d", args.train_batch_size)
     logger.info("  Total train batch size (w. parallel, distributed & accumulation) = %d",
                 args.train_batch_size * args.gradient_accumulation_steps * (
                     torch.distributed.get_world_size() if args.local_rank != -1 else 1))
-    logger.info("  Gradient Accumulation steps = %d", args.gradient_accumulation_steps)
+    logger.info("  Gradient Accumulation steps = %d", args.gradient_accumulation_steps)'''
 
     model.zero_grad()
     #set_seed(args)  # Added here for reproducibility (even between python 2 and 3)
@@ -427,6 +428,7 @@ def train(args, model):
 
 
 def main():
+    '''
     parser = argparse.ArgumentParser()
     # Required parameters
     parser.add_argument("--name", required=True,
@@ -505,6 +507,7 @@ def main():
     set_seed(args)
 
     # Model & Tokenizer Setup
+    '''
    
     config = CONFIGS[args.model_type]
 
@@ -515,9 +518,9 @@ def main():
     model.to(args.device)
     num_params = count_parameters(model)
 
-    logger.info("{}".format(config))
-    logger.info("Training parameters %s", args)
-    logger.info("Total Parameter: \t%2.1fM" % num_params)
+    #logger.info("{}".format(config))
+    #logger.info("Training parameters %s", args)
+    #logger.info("Total Parameter: \t%2.1fM" % num_params)
     print(num_params)
 
     # Training
