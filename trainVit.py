@@ -229,7 +229,7 @@ def main():
             # Each epoch has a training and validation phase
             epoch_it = tqdm(dataloader)
             for step, batch in enumerate(epoch_it):
-                batch = tuple(t.to(args.device) for t in batch)
+                batch = tuple(t.to(device) for t in batch)
                 x, y = batch
                 loss = model(x, y)
                 
