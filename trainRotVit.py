@@ -63,14 +63,14 @@ class ImageNetKaggle(Dataset):
             if self.transform:
                 x = self.transform(x)
             img, target  = x, self.targets[idx]
-            if self.rotate:
-                p = np.random.rand(1)
+            
+            p = np.random.rand(1)
 
-                if p > 0.5:
-                    k = np.random.randint(1, 4)
-                    # print(k, '<<<<<<<<<')
-                    img = torch.rot90(img, dims=[1, 2], k=k)
-                # utils.plot_tensor([img[None, ...], img_shuffled[None, ...]])
+            if p > 0.5:
+                k = np.random.randint(1, 4)
+                # print(k, '<<<<<<<<<')
+                img = torch.rot90(img, dims=[1, 2], k=k)
+            # utils.plot_tensor([img[None, ...], img_shuffled[None, ...]])
 
             # x = torch.randn(1, 500, 500, 500)  # batch, c, h, w
             kc, kh, kw = 3, 32, 32  # kernel size
