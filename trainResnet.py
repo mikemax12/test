@@ -166,7 +166,7 @@ def train_model(model, criteria, optimizer, scheduler,
             # track history if only in train
 
                 #outputs = model(inputs)
-            logits = model(inputs).logits
+            logits = model(inputs)
             _, preds = torch.max(logits, 1)
             # model predicts one of the 1000 ImageNet classes
             #preds = logits.argmax(-1).item()
