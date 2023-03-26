@@ -197,7 +197,7 @@ def train_model(model, criteria, optimizer, scheduler,
                 best_acc = epoch_acc
                 best_model_wts = copy.deepcopy(model.state_dict())
             
-            scheduler.step()
+        scheduler.step()
            
 
         print()
